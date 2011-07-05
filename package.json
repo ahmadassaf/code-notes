@@ -1,0 +1,16 @@
+{
+  "author": "Stephen Blankenship",
+  "name": "notes",
+  "description": "a node.js version of Rails' \"rake notes\" functionality",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stephenb/node-notes.git"
+  },
+  "main": "./lib/notes",
+  "engines": {
+    "node": ">= v0.4.7"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

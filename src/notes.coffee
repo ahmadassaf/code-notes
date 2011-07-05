@@ -38,7 +38,7 @@ class Notes
   ]
   
   # You can filter out full directory trees
-  @filterDirectories = []
+  @filterDirectories = ["node_modules"]
   
   @skipHidden = true
   
