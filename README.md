@@ -15,7 +15,7 @@ For example, if a file contained these lines somewhere in it:
 
 Those comments would be annotated as:
 
-  * /path/to/my/file
+    * /path/to/my/file
     Line 8:    ✐ NOTE This line should get annoated by Notes.
     Line 9:   ↘ OPTIMIZE Make things faster!
     Line 10:   ✓ TODO Annotate your tasks.
