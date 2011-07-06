@@ -1,6 +1,10 @@
 node-notes is a node.js version of Rails' "rake notes" functionality. It allows you 
 to put comments in your code and then have them annotated across your whole project.
 
+To install:
+
+    npm install notes
+
 For example, if a file contained these lines somewhere in it:
 
     code...
