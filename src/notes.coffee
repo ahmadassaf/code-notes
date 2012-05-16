@@ -64,7 +64,7 @@ class Notes
         onLine = (line, lineNum, filePath) ->
           for key, pattern of Notes.patterns
             if line.match(pattern.regexp)?
-              output[filePath] = "* #{filePath}\n".green unless output[filePath]?
+              output[filePath] = "* #{filePath.replace('//','/')}\n".green unless output[filePath]?
               line = line.replace(pattern.regexp, '')
               # Make the output kinda pretty...
               spaces = '     '
