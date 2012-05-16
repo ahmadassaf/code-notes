@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+/**
+ * Notes.
+ *
+ * @type {Function}
+ */
+var Notes = require('../lib/notes');
+
+/**
+ * Argv.
+ *
+ * @type {Array}
+ */
+var argv = process.argv.slice(2, process.argv.length);
+
+if (0 === argv.length) {
+  return new Notes(process.cwd()).annotate();
+}
+
+argv.forEach(function(arg) {
+  new Notes(arg).annotate();
+});
