@@ -11,6 +11,10 @@
   "engines": {
     "node": ">= v0.4.7"
   },
+  "contributors": [
+    { "name": "Veselin Todorov",
+      "email": "hi@vesln.com" }
+    ],
   "dependencies": {},
   "devDependencies": {}
 }
