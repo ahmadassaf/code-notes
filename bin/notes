@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 
 /**
+ * Core dependencies.
+ */
+var fs = require('fs');
+var path = require('path');
+
+/**
  * Notes.
  *
  * @type {Function}
@@ -14,10 +20,30 @@ var Notes = require('../lib/notes');
  */
 var argv = process.argv.slice(2, process.argv.length);
 
-if (0 === argv.length) {
-  return new Notes(process.cwd()).annotate();
+/**
+ * Current working directory.
+ *
+ * @type {String}
+ */
+var cwd = process.cwd();
+
+/**
+ * Runtime configurations path.
+ *
+ * @type {String}
+ */
+var rc = path.join(cwd, '.notesrc');
+
+if (0 !== argv.length) {
+  return argv.forEach(function(arg) {
+    new Notes(arg).annotate();
+  });
 }
 
-argv.forEach(function(arg) {
-  new Notes(arg).annotate();
+if (!fs.existsSync(rc)) {
+  return new Notes(cwd).annotate();
+}
+
+fs.readFileSync(rc, 'utf8').trim().split(/\s+/).forEach(function(directory) {
+  new Notes(directory).annotate();
 });
