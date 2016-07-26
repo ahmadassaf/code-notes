@@ -1,7 +1,7 @@
 fs = require 'fs'
 colors = require 'colors'
 
-# The Notes class holds all the logic needed for crawling a directory of files, 
+# The Notes class holds all the logic needed for crawling a directory of files,
 # searching for a set of patterns to annotate.
 #
 # Samples:
@@ -11,11 +11,11 @@ colors = require 'colors'
 # FIXME: Keep up with things to fix.
 #
 class Notes
-  
+
   # Defines the patterns that will be checked during file annotating.
-  # If you want to run this on something other than ruby, coffeesciprt, or javascript 
-  # files then you may need to change this. The default pattern is looking for a line 
-  # beginning with a comment and then followed with "TODO", "NOTE", or "OPTIMIZE" keywords. 
+  # If you want to run this on something other than ruby, coffeesciprt, or javascript
+  # files then you may need to change this. The default pattern is looking for a line
+  # beginning with a comment and then followed with "TODO", "NOTE", or "OPTIMIZE" keywords.
   #
   @patterns =
     todo:
@@ -30,33 +30,33 @@ class Notes
     fixme:
       regexp: /^.*(#|\/\/|\/\*)\s*FIXME\W*/
       label:  "☂ FIXME".underline.red
-  
+
   # You can also customize what types of file extensions will be filtered out of annotation.
   @filterExtensions = [
-    "\\.jpg", "\\.jpeg", "\\.mov", "\\.mp3", "\\.gif", "\\.png", 
+    "\\.jpg", "\\.jpeg", "\\.mov", "\\.mp3", "\\.gif", "\\.png",
     "\\.log", "\\.bin", "\\.psd", "\\.swf", "\\.fla", "\\.ico"
   ]
-  
+
   # You can filter out full directory trees
-  @filterDirectories = ["node_modules"]
-  
+  @filterDirectories = ["node_modules", "components", "bower_components"]
+
   @skipHidden = true
-  
+
   @concurrentFiles = 30
-  
+
   constructor: (@rootDir) ->
     # Constructor must take at least a root directory as first argument
     throw "Root directory is required." unless @rootDir
-    
+
   annotate: ->
     files = []
     filesUnderDirectory @rootDir, (file) ->
       files.push file
-    
+
     # Simple way to control # of files being opened at a time...
     concurrency = 0
     output = {}
-    
+
     # TODO: Clean this up some. The implementation got much more complex than I originally planned.
     run = ->
       while files.length > 0 and concurrency < Notes.concurrentFiles
@@ -71,19 +71,19 @@ class Notes
               spaces = spaces.substring(0, spaces.length-1) for n in (lineNum+1).toString()
               lineNumStr = "Line #{lineNum}:".grey
               output[filePath] += "  #{lineNumStr}#{spaces}#{pattern.label} #{line}\n"
-            
+
         onCompletion = (filePath) ->
           # Spit out the results for the file
           console.log output[filePath] if output[filePath]?
           concurrency--
           run()
-      
+
         file = files.shift()
         # Process the file line-by-line
         eachLineIn file, onLine, onCompletion
         concurrency++
     run()
-  
+
   filesUnderDirectory = (dir, fileCallback) ->
     try
       files = fs.readdirSync dir
@@ -101,7 +101,7 @@ class Notes
         console.log "#{error}... continuing."
       else
         throw error
-        
+
   eachLineIn = (filePath, onLine, onCompletion) ->
     fs.readFile filePath, (err, data) ->
       throw err if err?
