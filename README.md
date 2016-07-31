@@ -1,14 +1,14 @@
-node-notes is a node.js version of Rails' "rake notes" functionality. It allows you 
-to put comments in your code and then have them annotated across your whole project.
+node-notes is a node.js version of Rails' "rake notes" functionality. It allows you
+to put comments in your code and then have them annotated across your whole project. Uses local ``.gitignore`` to ignore files or default ignore list.
 
 ### Installation:
-
 
     npm install notes -g
 
 ### Usage:
 
     $ notes              # will search for notes in cwd
+    $ notes .            # will search for notes in cwd considers .gitignore to ignore files
     $ notes lib/ test/   # will search only in lib and test
 
 ### What It Does:
@@ -18,10 +18,10 @@ For example, if a file contained these lines somewhere in it:
     code...
     # NOTE: This line should get annoated by Notes.
     # OPTIMIZE Make things faster!
-    
+
     more code...
     # TODO: Annotate your tasks.
-    
+
     yet more code...
     # FIXME: Keep up with things to fix.
 

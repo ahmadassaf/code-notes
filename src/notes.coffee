@@ -1,5 +1,21 @@
+'use strict';
+
 fs = require 'fs'
 colors = require 'colors'
+path = require 'path'
+minimatch = require 'minimatch'
+
+getFilterDirectories = (rootDir) ->
+  defaultPatterns = ["node_modules", "components", "bower_components"]
+  rootDir = rootDir || '.'
+  try
+    data = fs.readFileSync(path.join(rootDir, '.gitignore'), 'utf8')
+    if data
+      data.split("\n")
+    else
+      defaultPatterns
+  catch err
+    defaultPatterns
 
 # The Notes class holds all the logic needed for crawling a directory of files,
 # searching for a set of patterns to annotate.
@@ -37,9 +53,6 @@ class Notes
     "\\.log", "\\.bin", "\\.psd", "\\.swf", "\\.fla", "\\.ico"
   ]
 
-  # You can filter out full directory trees
-  @filterDirectories = ["node_modules", "components", "bower_components"]
-
   @skipHidden = true
 
   @concurrentFiles = 30
@@ -47,10 +60,11 @@ class Notes
   constructor: (@rootDir) ->
     # Constructor must take at least a root directory as first argument
     throw "Root directory is required." unless @rootDir
+    @filterDirectories = getFilterDirectories(@rootDir)
 
   annotate: ->
     files = []
-    filesUnderDirectory @rootDir, (file) ->
+    @filesUnderDirectory @rootDir, (file) ->
       files.push file
 
     # Simple way to control # of files being opened at a time...
@@ -84,14 +98,22 @@ class Notes
         concurrency++
     run()
 
-  filesUnderDirectory = (dir, fileCallback) ->
+  isInFilteredDirectories: (f) ->
+    result = false
+
+    for pattern in @filterDirectories
+      result = result || minimatch(f, pattern)
+
+    !result
+
+  filesUnderDirectory: (dir, fileCallback) ->
     try
       files = fs.readdirSync dir
       # If it's another directory, make a recursive call into it
       if files?
         files = (f for f in files when !f.match(/^\./)) if Notes.skipHidden # Skip hidden files/directories
-        files = (f for f in files when Notes.filterDirectories.indexOf(f) < 0) # Skip directories that should be filtered
-        filesUnderDirectory("#{dir}/#{f}", fileCallback) for f in files
+        files = (f for f in files when @isInFilteredDirectories(f)) # Skip directories that should be filtered
+        @filesUnderDirectory("#{dir}/#{f}", fileCallback) for f in files
     catch error
       if error.code is "ENOTDIR"
         filter = ///(#{Notes.filterExtensions.join('|')})$/// # skip files matching filterExtensions

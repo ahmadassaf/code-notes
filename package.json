@@ -12,11 +12,18 @@
     "node": ">= v0.4.7"
   },
   "contributors": [
-    { "name": "Veselin Todorov",
-      "email": "hi@vesln.com" }
-    ],
+    {
+      "name": "Anudeep Potlapally",
+      "email": "anudeep.webdev@gmail.com"
+    },
+    {
+      "name": "Veselin Todorov",
+      "email": "hi@vesln.com"
+    }
+  ],
   "dependencies": {
-    "colors":  "*"
+    "colors": "*",
+    "minimatch": "https://github.com/isaacs/minimatch/tarball/master"
   },
   "devDependencies": {
     "coffee-script": ">= 1.1.1"
