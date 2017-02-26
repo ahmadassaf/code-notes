@@ -12,6 +12,8 @@ It ends up giving you an output like this:
 
 ![](http://i.imgur.com/OXsTtCZ.png)
 
+code-notes also exits with proper error codes in case you want to use that in an integration workflow. It will terminate with an error code if any annotations are found.
+
 ### Installation:
 
     npm install code-notes -g
