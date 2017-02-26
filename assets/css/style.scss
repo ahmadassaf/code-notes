@@ -1,0 +1,33 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.btn {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #fff;
+    background-color: #399f62;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+    border-color: none;
+    border-style: solid;
+    border-width: 0;
+    border-radius: 0;
+}
+
+.page-header {
+    color: #000;
+    text-align: center;
+    border-top: 10px solid #399f62;
+    background-image:none;
+}
+
+a {
+    color: #268bd2;
+}
+
+@media screen and (min-width: 64em) {
+	.page-header {
+	    padding: 1rem 6rem;
+	}
+}
