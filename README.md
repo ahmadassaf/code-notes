@@ -119,10 +119,10 @@ notes -x src/ -x -x node_modules/ -x *.md
 code-notes scan for NOTE, OPTIMIZE, TODO, HACK, XXX, FIXME, and BUG comments within your source, and print them to stdout so you can deal with them. However, if you wish to define more annotations to be extracted, this can be easily done by extending the definitions in `lib/messageChecks.js`. An example for an annotation:
 
 ```javascript
-"todo": {
-	"regex": /[\/\/][\/\*]\s*TODO\s*(?:\(([^:]*)\))*\s*:?\s*(.*)/i,
-	"label": ' ✓ TODO',
-	"colorer": chalk.magenta
+todo: {
+	regex: /[\/\/][\/\*]\s*TODO\s*(?:\(([^:]*)\))*\s*:?\s*(.*)/i,
+	label: ' ✓ TODO',
+	colorer: chalk.magenta
 }
 ```
 
