@@ -3,19 +3,19 @@
 
 @import "{{ site.theme }}";
 
+.page-header {
+	background: none !important;
+    color: #000 !important;
+    border-top: 10px solid #399f62 !important;
+    background-image:none !important;
+}
+
 .btn {
     color: #fff !important;
     background-color: #399f62 !important;
     border-color: none !important;
     border-width: 0 !important;
     border-radius: 0 !important;
-}
-
-.page-header {
-	background: none !important;
-    color: #000 !important;
-    border-top: 10px solid #399f62 !important;
-    background-image:none !important;
 }
 
 a {
@@ -25,6 +25,10 @@ a {
 .main-content pre {
 	background: #fff !important;
 	border: none !important;
+}
+
+footer {
+	display: none !important;
 }
 
 @media screen and (min-width: 64em) {
