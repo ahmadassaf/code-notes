@@ -4,30 +4,26 @@
 @import "{{ site.theme }}";
 
 .btn {
-    display: inline-block;
-    margin-bottom: 1rem;
-    color: #fff;
-    background-color: #399f62;
-    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
-    border-color: none;
-    border-style: solid;
-    border-width: 0;
-    border-radius: 0;
+    color: #fff !important;
+    background-color: #399f62 !important;
+    border-color: none !important;
+    border-width: 0 !important;
+    border-radius: 0 !important;
 }
 
 .page-header {
-    color: #000;
-    text-align: center;
-    border-top: 10px solid #399f62;
-    background-image:none;
+	background: none !important;
+    color: #000 !important;
+    border-top: 10px solid #399f62 !important;
+    background-image:none !important;
 }
 
 a {
-    color: #268bd2;
+    color: #268bd2 !important;
 }
 
 @media screen and (min-width: 64em) {
 	.page-header {
-	    padding: 1rem 6rem;
+	    padding: 1rem 6rem !important;
 	}
 }
