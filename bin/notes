@@ -1,49 +1,22 @@
 #!/usr/bin/env node
 
-/**
- * Core dependencies.
- */
-var fs = require('fs');
-var path = require('path');
+"use strict";
 
-/**
- * Notes.
- *
- * @type {Function}
- */
-var Notes = require('../lib/notes');
+const program = require('commander');
 
-/**
- * Argv.
- *
- * @type {Array}
- */
-var argv = process.argv.slice(2, process.argv.length);
+const Notes   = require('../lib/notes');
 
-/**
- * Current working directory.
- *
- * @type {String}
- */
-var cwd = process.cwd();
+program
+	.version('1.0.0')
+	.description('Tool to summarise all code annotation like TODO or FIXME')
+	.option('-s, --source [dir]', 'root directory to be included only for checks (default: current working directory)')
+	.option('-x, --patterns [dir]', 'Path patterns to exclude (default: include all files and directories)',
+		function collect(val, collector) { collector.push("" + val); return collector; }, [])
+	.option('-e, --encoding [type]', 'file encoding to be scanned (default: utf8)')
+	.option('-l, --line-length <n>', 'number of max characters a line (default: 1000)', parseInt)
+	.option('-h, --ignore-hidden <n>', 'ignore hidden files (default: false)')
+	.option('-g, --git-ignore <n>', 'ignore patterns from your .gitignore file. This paramter accepts the path for the .gitIgnore file (default: false | no .gitignore is read')
 
-/**
- * Runtime configurations path.
- *
- * @type {String}
- */
-var rc = path.join(cwd, '.notesrc');
+	.parse(process.argv);
 
-if (0 !== argv.length) {
-  return argv.forEach(function(arg) {
-    new Notes(arg).annotate();
-  });
-}
-
-if (!fs.existsSync(rc)) {
-  return new Notes(cwd).annotate();
-}
-
-fs.readFileSync(rc, 'utf8').trim().split(/\s+/).forEach(function(directory) {
-  new Notes(directory).annotate();
-});
+Notes(program);

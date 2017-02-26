@@ -1,11 +1,11 @@
 {
-  "author": "Stephen Blankenship",
-  "name": "notes",
-  "description": "a node.js version of Rails' \"rake notes\" functionality",
-  "version": "0.0.4",
+  "author": "Ahmad Assaf",
+  "name": "code-notes",
+  "description": "Tool to summarise all code annotation like TODO or FIXME",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/stephenb/node-notes.git"
+    "url": "git://github.com/ahmadassaf/code-notes.git"
   },
   "main": "./lib/notes",
   "engines": {
@@ -13,17 +13,18 @@
   },
   "contributors": [
     {
-      "name": "Anudeep Potlapally",
-      "email": "anudeep.webdev@gmail.com"
-    },
-    {
-      "name": "Veselin Todorov",
-      "email": "hi@vesln.com"
+      "name": "Ahmad Assaf",
+      "email": "me@ahmadassaf.com"
     }
   ],
   "dependencies": {
-    "colors": "*",
-    "minimatch": "https://github.com/isaacs/minimatch/tarball/master"
+    "byline": "5.0.0",
+    "chalk": "1.1.3",
+    "commander": "^2.9.0",
+    "event-stream": "3.3.4",
+    "lodash": "^4.17.4",
+    "multimatch": "^2.1.0",
+    "readdirp": "2.1.0"
   },
   "devDependencies": {
     "coffee-script": ">= 1.1.1"
