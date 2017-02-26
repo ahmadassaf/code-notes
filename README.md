@@ -1,3 +1,5 @@
+# code-notes
+
 code-notes is a node.js version of Rails' "rake notes" functionality. It allows you to put comments in your code and then have them annotated across your whole project.
 
 code-notes is based on two npm modules, mainly forked from [fixme](https://github.com/JohnPostlethwait/fixme) but also inspired by [node-notes](https://github.com/stephenb/node-notes). The main differences in this module is:
