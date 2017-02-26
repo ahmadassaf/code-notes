@@ -7,6 +7,7 @@ code-notes is based on two npm modules, mainly forked from [fixme](https://githu
  - Flexibility in defining the source scanning directory
  - The ability to pass exclude patterns that are compatible with [multimatch](https://github.com/sindresorhus/multimatch)
  - The ability to read exclusion list from a `.gitignore` file
+ - The ability to include **only** certain path patterns to be scanned
 
 It ends up giving you an output like this:
 
@@ -38,6 +39,7 @@ notes --help
     -s, --source [dir]       root directory to be included only for checks (default: current working directory)
     -x, --patterns [dir]     Path patterns to exclude (default: include all files and directories)
     -e, --encoding [type]    file encoding to be scanned (default: utf8)
+    -i, --include [dir]      Path patterns to include only (default: include all files and directories). Note that include patterns will overwrite any exclude patterns
     -l, --line-length <n>    number of max characters a line (default: 1000)
     -h, --ignore-hidden <n>  ignore hidden files (default: false)
     -g, --git-ignore <n>     ignore patterns from your .gitignore file. This paramter accepts the path for the .gitIgnore file (default: false | no .gitignore is read
@@ -47,6 +49,7 @@ notes --help
 
   * **source:** The path to scan through for notes, defaults to process.cwd()
   * **patterns:** Glob patterns for files directories to ignore. Passes these straight to [multimatch](https://github.com/sindresorhus/multimatch) so check there for more information on proper syntax.
+  * **include** Glob patterns for files or directories to be inlucded **ONLY** in the scan process. Note that any include files will overwrite any exclude patterns
   * **ignoreHidden:** Define if you want to ignore hidden files and directories. Defaults to true as all paths will be scanned.
   * **encoding:** The encoding the files scanned will be opened as.
   * **lineLength:** The number of max characters a line can be before Fixme gives up and doen not scan it for matches. If a line is too long, the regular expression will take an extremely long time to finish. *You have been warned!*
@@ -112,7 +115,11 @@ Those comments would be annotated as:
 notes -g .gitignore -h true
 # Exclude any file under the src directory and node_modules and any file with .md extension
 notes -x src/ -x -x node_modules/ -x *.md
+# Only scan .md files
+notes -i "*.md"
 ```
+
+> **Important**: For some reason that i still cant figure out, some extensions like `.md` `.html` have to be wrapped with `"`. So if your pattern does not seem to work at first, try to wrap it with quotes
 
 ### Extending code-notes
 
@@ -128,10 +135,11 @@ todo: {
 
 #### Ignoring files
 
-Certain file extensions are skipped from being scanned. They are defined in `lib/notes.js`
+Certain file extensions and directories are skipped from being scanned. They are defined in `lib/notes.js`
 
 ```javascript
-const BAD_EXTENSIONS = ["!*.jpg", "!*.jpeg", "!*.mov", "!*.mp3", "!*.gif", "!*.png", "!*.log", "!*.bin", "!*.psd", "!*.swf", "!*.fla", "!*.ico"];
+const BAD_EXTENSIONS = ["!*.jpg", "!*.jpeg", "!*.mov", "!*.mp3", "!*.gif", "!*.png", "!*.log", "!*.bin", "!*.psd", "!*.swf", "!*.fla", "!*.ico", "!*.jar", "!*.war", "!*.ear", "!*.zip", "!*.tar.gz", "!*.rar"];
+const BAD_DIRECTORIES= ["!.git/**", "!.sass-cache/**", "!coverage/**"]
 ```
 
 The object should contain the following fields:

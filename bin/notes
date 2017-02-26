@@ -12,6 +12,8 @@ program
 	.option('-s, --source [dir]', 'root directory to be included only for checks (default: current working directory)')
 	.option('-x, --patterns [dir]', 'Path patterns to exclude (default: include all files and directories)',
 		function collect(val, collector) { collector.push("" + val); return collector; }, [])
+	.option('-i, --include [dir]', 'Path patterns to include only (default: include all files and directories). Note that include patterns will overwrite any exclude patterns',
+		function collect(val, collector) { collector.push("" + val); return collector; }, [])
 	.option('-e, --encoding [type]', 'file encoding to be scanned (default: utf8)')
 	.option('-l, --line-length <n>', 'number of max characters a line (default: 1000)', parseInt)
 	.option('-h, --ignore-hidden <n>', 'ignore hidden files (default: false)')
