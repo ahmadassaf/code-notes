@@ -86,11 +86,11 @@ For example, if a file contained these lines somewhere in it:
 
 ```
 // NOTE: This is the sample output for a note!
-// OPTIMIZE (John Postlethwait): This is the sample output for an optimize with an author!
+// OPTIMIZE (Mr Author): This is the sample output for an optimize with an author!
 // TODO: This is the sample output for a todo!
 // HACK: This is the sample output for a hack! Don't commit hacks!
 // XXX: This is the sample output for a XXX! XXX's need attention too!
-// FIXME (John Postlethwait): This is the sample output for a fixme! Seriously fix this...
+// FIXME (Mr Author): This is the sample output for a fixme! Seriously fix this...
 // BUG: This is the sample output for a bug! Who checked in a bug?!
 ```
 
@@ -100,7 +100,7 @@ Those comments would be annotated as:
 • path/to/your/directory/file.js [7 messages]:
   [Line   1]  ✐ NOTE: This is here because sometimes an intermittent issue appears.
   [Line   7]  ↻ OPTIMIZE: This could be reworked to not do a O(N2) lookup.
-  [Line   9]  ✓ TODO from John: Add a check here to ensure these are always strings.
+  [Line   9]  ✓ TODO from Mr Author: Add a check here to ensure these are always strings.
   [Line  24]  ✄ HACK: I am doing something here that is horrible, but it works for now...
   [Line  89]  ✗ XXX: Let's do this better next time? It's bad.
   [Line 136]  ☠ FIXME: We sometimes get an undefined index in this array.
@@ -167,9 +167,9 @@ A code annotation needs to follow these rules to be picked up by Fixme:
 You can have an author of a comment displayed via Fixme:
 
 ```javascript
-// NOTE(John Postlethwait): This comment will be shown as a note, and have an author!
+// NOTE(Mr Author): This comment will be shown as a note, and have an author!
 ```
 
 ```shell
-  [Line 1]  ✐ NOTE from John Postlethwait: This comment will be shown as a note, and have an author!
+  [Line 1]  ✐ NOTE from Mr Author: This comment will be shown as a note, and have an author!
 ```
