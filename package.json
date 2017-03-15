@@ -3,6 +3,7 @@
   "name": "code-notes",
   "description": "Tool to summarise all code annotation like TODO or FIXME",
   "version": "1.0.4",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/ahmadassaf/code-notes.git"
