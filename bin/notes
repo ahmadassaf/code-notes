@@ -5,9 +5,10 @@
 const program = require('commander');
 
 const Notes   = require('../lib/notes');
+const Package   = require('../package.json');
 
 program
-	.version('1.0.0')
+	.version(Package.version)
 	.description('Tool to summarise all code annotation like TODO or FIXME')
 	.option('-s, --source [dir]', 'root directory to be included only for checks (default: current working directory)')
 	.option('-x, --patterns [dir]', 'Path patterns to exclude (default: include all files and directories)',

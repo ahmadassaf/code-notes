@@ -8,6 +8,10 @@
     "type": "git",
     "url": "git://github.com/ahmadassaf/code-notes.git"
   },
+  "scripts": {
+    "test":"notes",
+    "test:clean":"node ./bin/notes . --git-ignore .gitignore"
+  },
   "main": "./lib/notes",
   "engines": {
     "node": ">= v0.4.7"
